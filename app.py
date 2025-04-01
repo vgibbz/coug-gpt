@@ -40,7 +40,7 @@ Settings.embed_model = OpenAIEmbedding(
 
 Settings.llm = OpenAI(
     api_key=openai_api_key,
-    model="gpt-4o",
+    model="gpt-3.5-turbo",
     temperature=0.3,
     system_prompt="""
     You are a professional university assistant that answers questions based on the given university PDF documents. 
