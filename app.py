@@ -84,10 +84,10 @@ def load_index():
             path = doc.metadata.get("file_path", "")
             doc.metadata["file_name"] = os.path.basename(path)
 
-        splitter = SentenceSplitter(chunk_size=200, chunk_overlap=50)
+        splitter = SentenceSplitter(chunk_size=512, chunk_overlap=64)
         nodes = splitter.get_nodes_from_documents(documents)
 
-        index = VectorStoreIndex.from_documents(documents, show_progress=True)
+        index = VectorStoreIndex.from_documents(nodes, show_progress=True)
         index.storage_context.persist(persist_dir=PERSIST_DIR)
     else:
         storage_context = StorageContext.from_defaults(persist_dir=PERSIST_DIR)
@@ -98,7 +98,7 @@ index = load_index()
 
 # === Retriever & query engine ===
 retriever = VectorIndexRetriever(index=index, similarity_top_k=25)
-postprocessor = SimilarityPostprocessor(similarity_cutoff=0.25)
+postprocessor = SimilarityPostprocessor(similarity_cutoff=0.20)
 
 query_engine = RetrieverQueryEngine.from_args(
     retriever=retriever,
