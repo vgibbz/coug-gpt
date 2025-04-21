@@ -3,8 +3,8 @@ import os
 from dotenv import load_dotenv
 import pathlib
 
-os.environ["TIKTOKEN_CACHE_DIR"] = "/app/.cache"
-os.makedirs("/app/.cache", exist_ok=True)
+os.environ["TIKTOKEN_CACHE_DIR"] = "/tmp/.cache"
+os.makedirs("/tmp/.cache", exist_ok=True)
 
 # === Load environment ===
 load_dotenv()
